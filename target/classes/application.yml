@@ -1,0 +1,44 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: ms-hce
+  datasource:
+    # Database per Service: MS-HCE tiene su propia BD
+    url: jdbc:h2:mem:hcedb;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+# Actuator endpoints para Kubernetes health checks
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+# Info del microservicio
+info:
+  app:
+    name: MediFlow MS-HCE
+    description: Microservicio de Historial Clinico Electronico
+    version: 1.0.0
+    patterns:
+      - Repository Pattern
+      - Factory Method
+      - Strategy Pattern
